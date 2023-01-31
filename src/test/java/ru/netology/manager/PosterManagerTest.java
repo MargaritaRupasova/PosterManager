@@ -2,8 +2,41 @@ package ru.netology.manager;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import ru.netology.repository.PosterRepository;
+
+import static org.mockito.Mockito.*;
 
 public class PosterManagerTest {
+
+    PosterRepository repo = Mockito.mock(PosterRepository.class);
+    PosterManager manager = new PosterManager(repo);
+
+    String film1 = new String("Film I");
+    String film2 = new String("Film II");
+    String film3 = new String("Film III");
+
+    // String film1 = "Film I";
+    // String film2 = "Film II";
+    // String film3 = "Film III";
+
+
+    @Test
+    public void addMockitoFilms() {
+
+        String[] films = { film1, film2, film3 };
+        // manager.addFilm(film1);
+        // manager.addFilm(film2);
+        // manager.addFilm(film3);
+
+        doReturn(films).when(repo).findAll();
+
+        String[] expected = { film3, film2, film1 };
+        String[] actual = manager.findLast();
+
+        Assertions.assertArrayEquals(expected, actual);
+
+    }
 
     @Test
     public void addedFilm() {
