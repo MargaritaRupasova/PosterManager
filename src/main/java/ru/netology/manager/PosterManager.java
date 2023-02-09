@@ -42,7 +42,7 @@ public class PosterManager {
         }
         String[] tmp = new String[resultLength];
         for (int i = 0; i < tmp.length; i++) {
-            tmp[i] = films[resultLength - 1 - i];
+            tmp[i] = films[films.length - 1 - i];
         }
         return tmp;
     }
